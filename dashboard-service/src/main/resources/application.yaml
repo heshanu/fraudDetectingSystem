@@ -1,0 +1,19 @@
+server:
+  port: 8084
+
+spring:
+  kafka:
+    consumer:
+      group-id: analytics-group
+      # Ara kalin Notification service ekata dapu deserializer settings ma methanatath danna
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: "com.example.dashboard_service.Transaction"
+        spring.json.trusted.packages: "*"
+  mongodb:
+      uri: mongodb://heshanu97_db_user:Wd2Wl2ALnWOHTFEH@cluster0-shard-00-00.mongodb.net:27017,cluster0-shard-00-01.mongodb.net:27017,cluster0-shard-00-02.mongodb.net:27017/analytics_db?ssl=true&replicaSet=atlas-xxxx-shard-0&authSource=admin&retryWrites=true&w=majority\
+eureka:
+    client:
+      service-url:
+        defaultZone: http://localhost:8761/eureka/

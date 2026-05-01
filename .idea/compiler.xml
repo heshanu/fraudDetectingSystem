@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="APIGateway" />
+        <module name="demo" />
+        <module name="alert-service" />
+        <module name="dashboard-service" />
+        <module name="eureka-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="discovery-service" target="21" />
+      <module name="fraud-detection-service" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="APIGateway" options="-parameters" />
+      <module name="alert-service" options="-parameters" />
+      <module name="dashboard-service" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="discovery-service" options="-parameters" />
+      <module name="eureka-server" options="-parameters" />
+      <module name="fraud-detection-service" options="-parameters" />
+    </option>
+  </component>
+</project>

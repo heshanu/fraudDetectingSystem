@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  cloud:
+    gateway:
+      routes:
+        - id: fraud-check-route
+          uri: lb://fraud-detection-service
+          predicates:
+            - Path=/api/v1/transactions/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
