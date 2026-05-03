@@ -1,14 +1,11 @@
 server:
   port: 8761
-  servlet:
-    context-path: /eureka-server
+
 spring:
   application:
-    name: discovery-service
+    name: eureka-server
 
 eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
-  instance:
-    hostname: localhost
