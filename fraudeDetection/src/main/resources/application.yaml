@@ -10,7 +10,12 @@ spring:
       port: 6379
   kafka:
     consumer:
+      group-id: notification-group3
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
+        spring.json.trusted.packages: "*"
         spring:
           json:
             use:
