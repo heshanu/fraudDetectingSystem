@@ -4,34 +4,55 @@ server:
 spring:
   application:
     name: fraud-detection-service
+
+  # --- DATABASE CONFIGURATION ---
+  datasource:
+    url: jdbc:mysql://localhost:3306/fraud_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      # Change to 'create' for the very first run to ensure table creation
+      # Change to 'update' for subsequent runs to keep your data
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        highlight_sql: true
+
+  # --- REDIS CONFIGURATION ---
   data:
     redis:
       host: localhost
       port: 6379
+
+  # --- KAFKA CONFIGURATION ---
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
-      group-id: notification-group3
+      group-id: notification-group-v5
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         spring.json.trusted.packages: "*"
-        spring:
-          json:
-            use:
-              type:
-                headers: false
-    bootstrap-servers: localhost:9092
-    streams:
-      application-id: fraud-analyzer-v1
-      properties:
-        spring.json.use.type.headers: false
-        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-        default.value.serde: org.springframework.kafka.support.serializer.JsonSerde
-
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+
+# --- LOGGING CONFIGURATION ---
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.results: INFO
+    org.hibernate.type.descriptor.sql: INFO
+    org.springframework.kafka: INFO
