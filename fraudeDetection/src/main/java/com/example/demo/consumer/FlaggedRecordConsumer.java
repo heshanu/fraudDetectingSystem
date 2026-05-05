@@ -19,7 +19,7 @@ public class FlaggedRecordConsumer {
     @Transactional
     @KafkaListener(
             topics = "flagged-transactions-topic",
-            groupId = "recovery-group4", // Use a COMPLETELY new name here
+            groupId = "recovery-group7", // Use a COMPLETELY new name here
             properties = {"auto.offset.reset=earliest"} // Force read from start
     )
     public void consume(String message) {

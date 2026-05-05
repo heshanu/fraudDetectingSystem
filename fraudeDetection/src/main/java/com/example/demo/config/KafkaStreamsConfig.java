@@ -55,7 +55,8 @@ public class KafkaStreamsConfig {
             return isHighAmount || isBlacklisted;
         });
 
-        flaggedStream.to("flagged-transactions-topic",
+        flaggedStream.to("flagged-transactions-topic"
+                        ,
                 Produced.with(Serdes.String(), transactionSerde));
 
         return stream;
